@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    RedirectAttributes
+    <div class="py-5 text-center">
+        <h2>상품 상세</h2> </div>
+    <div>
+        <!-- 추가 완료 -->
+        <h2 th:if="${param.status}" th:text="'티켓 확인 완료!'"></h2>
+        <label for="ticketId">티켓 ID</label>
+        <input type="text" id="ticketId" name="ticketId" class="form-control"
+               value="1" th:value="${ticket.id}" readonly>
+    </div> <div>
+    <label for="userName">이름</label>
+    <input type="text" id="userName" name="userName" class="form-control"
+           value="상품A"  th:value="${ticket.userName}" readonly> </div>
+    <div>
+        <label for="phoneNumber">전화번호</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+               value="10000" th:value="${ticket.phoneNumber}" readonly>
+    </div>
+    <div>
+        <label for="residentNumber">주민번호</label>
+        <input type="text" id="residentNumber" name="residentNumber" class="form-control"
+               value="10000" th:value="${ticket.residentNumber}" readonly>
+    </div>
+    <div>
+    <label for="performanceName">공연 이름</label>
+    <input type="text" id="performanceName" name="performanceName" class="form-control"
+           value="10" th:value="${ticket.performanceId.name}" readonly>
+    </div>
+    <div>
+        <label for="performanceDate">공연 날짜</label>
+        <input type="text" id="performanceDate" name="performanceTime" class="form-control"
+               value="10" th:value="${ticket.performanceId.performanceTime}" readonly>
+    </div>
+    <div>
+        <label for="seatPosition">티켓 좌석</label>
+        <input type="text" id="seatPosition" name="seatPosition" class="form-control"
+               value="10" th:value="${ticket.seatPosition}" readonly>
+    </div>
+    <div>
+        <label for="checkin">입장 여부</label>
+        <input type="text" id="checkin" name="checkin" class="form-control"
+               value="10" th:value="${ticket.checkin}" readonly>
+    </div>
+    <div>
+        <label for="isIssued">발송 완료</label>
+        <input type="text" id="isIssued" name="isIssued" class="form-control"
+               value="10" th:value="${ticket.isIssued}" readonly>
+    </div>
+</div>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='tickets.html'"
+                    th:onclick="|location.href='@{/admin/sent/{ticketId}(ticketId=${ticket.id}) }'|"
+                    type="button">
+                발송완료
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{/admin/refreshQR/{ticketId}(ticketId=${ticket.id}) }'|"
+                    type="button">
+                QR 코드 다시 발급
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{/admin/ticket/{ticketId}/edit(ticketId=${ticket.id}) }'|"
+                    type="button">
+                    티켓 수정
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='tickets.html'"
+                    th:onclick="|location.href='@{/admin/tickets}'|"
+                    type="button">
+                    목록으로
+            </button>
+        </div>
+        <!-- 나중에 링크 바꿔줘야함. -->
+    </div>
+</div>
+</body>
+</html>

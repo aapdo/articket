@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Manage</title>
+    <link th:href="@{/css/reservation_manage.css}"
+          href="../css/reservation_manage.css" rel="stylesheet">
+    <style>
+        @-ms-viewport { width: device-width; }
+        @-o-viewport { width: device-width; }
+        @viewport { width: device-width; }
+        button:hover {}
+    </style>
+</head>
+<body>
+    <button id = "home_button"><img th:src="@{/img/home.png}" src="Resources/home.png" alt=""></button>
+    
+    <header id = "reservation_manage_header">
+        <span>예매자관리</span>
+    </header>
+    <section id = "reservation_manage_section">
+        <div id = "reservation_manage_concert_Info">
+            <img th:src="@{/img/reservation_manage_concert_poster.png}" src="Resources/reservation_manage_concert_poster.png" alt="">
+            <div id = "concert_text">
+                <h1>뮤지컬 빨래</h1>
+                <div id = "concert_time">
+                    <span>2022.11.01</span><span>~</span><span>2022.12.31</span>
+                </div>
+            </div>
+            
+            <button><a th:href="@{/admin/createQR/all}">QR코드 생성</a></button>
+        </div>
+        <table id = "reservation_manage_reservation_info">
+            <tr>
+                <th>성함</th>
+                <th>전화번호</th>
+                <th>좌석</th>
+                <th>체크인</th>
+                <th>발급여부</th>
+            </tr>
+            <tr th:each="ticket : ${tickets}">
+                <!--
+                <td><a href="item.html" th:href="@{/admin/{itemId}(itemId=${item.id})}" th:text="${item.id}">회원 id</a></td>
+                <td><a href="item.html" th:href="@{|/admin/ticket/${ti}|}" th:text="${item.itemName}">상품명</a></td>
+                -->
+                <td><a th:href="@{|/admin/ticket/${ticket.id}|}" th:text="${ticket.userName}"></a></td>
+                <td th:text="${ticket.phoneNumber}">010-1234-5678</td>
+                <td th:text="${ticket.seatPosition}">G14</td>
+                <td th:if="${ticket.checkin}">O</td>
+                <td th:unless="${ticket.checkin}">X</td>
+                <td th:if="${ticket.isIssued}">O</td>
+                <td th:unless="${ticket.isIssued}">X</td>
+            </tr>
+        </table>
+    </section>
+    
+
+    <script th:src="@{/js/reservation_manage.js}" src="reservation_manage.js"></script>
+</body>
+</html>
